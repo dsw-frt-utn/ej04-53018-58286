@@ -8,6 +8,7 @@ public class Persistencia {
     private static ArrayList<Vehiculo> vehiculos = new ArrayList<>();
     private static ArrayList<Responsable> responsables = new ArrayList<>();
     private static ArrayList<Sucursal> sucursales = new ArrayList<>();
+    private static ArrayList<Marca> marcas = new ArrayList<>();
     
     private static void inicializarResponsables(){
         Responsable r1 = new Responsable("Carlos Gómez", "25444111", "3815551111");
@@ -28,20 +29,44 @@ public class Persistencia {
         Sucursal s1 = sucursales.get(0);
         Sucursal s2 = sucursales.get(1);
         
-        VehiculoElectrico v1 = new VehiculoElectrico("AE123FG", "Renault", "Kangoo E-Tech", 2020, 1000, s1, 16);
-        VehiculoElectrico v2 = new VehiculoElectrico("AF456HI", "Ford", "E-Transit", 2021, 1300, s2, 16);
+        Marca m1 = marcas.get(0);
+        Marca m2 = marcas.get(1);
+        Marca m3 = marcas.get(2);
+        Marca m4 = marcas.get(3);
+        
+        
+        VehiculoElectrico v1 = new VehiculoElectrico("AE123FG", m2, "Kangoo E-Tech", 2020, 1000, s1, 16);
+        VehiculoElectrico v2 = new VehiculoElectrico("AF456HI", m1, "E-Transit", 2021, 1300, s2, 16);
 
-        VehiculoCombustible v3 = new VehiculoCombustible("AC789JK", "Iveco", "Daily", 2023, 1200, s1, 8, 1.5);
-        VehiculoCombustible v4 = new VehiculoCombustible("AD321LM", "Mercedes", "Sprinter", 2020, 1200, s2, 7, 1);
+        VehiculoCombustible v3 = new VehiculoCombustible("AC789JK", m3, "Daily", 2023, 1200, s1, 8, 1.5);
+        VehiculoCombustible v4 = new VehiculoCombustible("AD321LM", m4, "Sprinter", 2020, 1200, s2, 7, 1);
         
         vehiculos.add(v1);
         vehiculos.add(v2);
         vehiculos.add(v3);
         vehiculos.add(v4);
     }
+    private static void inicializarMarcas()
+    {
+        Marca m1 = new Marca("Ford", "Estados Unidos");
+        Marca m2 = new Marca("Renault", "Francia");
+        Marca m3 = new Marca("Iveco", "Italia");
+        Marca m4 = new Marca("Mercedes", "Alemania");
+        
+        marcas.add(m1);
+        marcas.add(m2);
+        marcas.add(m3);
+        marcas.add(m4);
+    }
     
     public static ArrayList<Vehiculo> getVehiculos(){
         return vehiculos;
+    }
+    public static ArrayList<Sucursal> getSucursales(){
+        return sucursales;
+    }
+    public static ArrayList<Marca> getMarcas(){
+        return marcas;
     }
     
     public static Optional<Vehiculo> getVehiculo(String patente){
@@ -50,9 +75,40 @@ public class Persistencia {
                 .findFirst();
     }
     
+    public static Marca getMarca(String nombre){
+        return marcas.stream().filter(m -> m.getNombre().equals(nombre)).findFirst().get();
+    }
+    public static Sucursal getSucursal(String codigo){
+        return sucursales.stream().filter(c -> c.getCodigo().equals(codigo)).findFirst().get();
+    }
+    
+    public static void addVehiculo(Object[] vehiculo)
+    {
+        Marca m = getMarca((String)vehiculo[1]);
+        Sucursal s = getSucursal((String)vehiculo[5]);
+        String tipo = (String)vehiculo[8];
+        Vehiculo v;
+        if(tipo.equals("COMBUSTIBLE"))
+        {
+            v = new VehiculoCombustible(
+                    (String)vehiculo[0],m,(String)vehiculo[2],(int)vehiculo[3],
+            (double)vehiculo[4],s, (double)vehiculo[6],(double)vehiculo[7]);
+        }
+        else
+        {
+            v = new VehiculoElectrico(
+                    (String)vehiculo[0],m,(String)vehiculo[2],(int)vehiculo[3],
+            (double)vehiculo[4],s, (double)vehiculo[6]);
+        }
+        
+        vehiculos.add(v);
+    }
+    
+    
     public static void inicializar(){
         inicializarResponsables();
         inicializarSucursales();
+        inicializarMarcas();
         inicializarVehiculos();
     }
 }

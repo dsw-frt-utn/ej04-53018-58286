@@ -17,6 +17,10 @@ public class Controlador {
         return vehiculos;
     }
     
+    public static void addVehiculo(Object[] v)
+    {
+        Persistencia.addVehiculo(v);
+    }
     public static double[] calcularConsumos(Map<String, Double> vehiculos){
         double consumoElectricos = 0;
         double consumoCombustible= 0;
