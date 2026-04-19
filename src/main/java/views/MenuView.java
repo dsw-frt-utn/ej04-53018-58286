@@ -80,14 +80,14 @@ public class MenuView extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-     ListarVehiculosView view = new ListarVehiculosView();
-     view.setVisible(true);
+        AltaVehiculoView v = new AltaVehiculoView();
+        v.setVisible(true);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
-        ListarVehiculosView v = new ListarVehiculosView();
-        v.setVisible(true);
+        ListarVehiculosView view = new ListarVehiculosView();
+        view.setVisible(true);
     }//GEN-LAST:event_btnListarActionPerformed
 
     /**

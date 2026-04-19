@@ -66,6 +66,11 @@ public class AltaVehiculoView extends javax.swing.JFrame {
         jLabel9.setText("Km/Litro:");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Añadir Vehículo");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -207,6 +212,11 @@ public class AltaVehiculoView extends javax.swing.JFrame {
         Controlador.addVehiculo(this.getVehiculo());
         this.cls();
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     public void cls()
     {
