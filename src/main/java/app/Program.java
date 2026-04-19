@@ -8,10 +8,8 @@ import views.MenuView;
 public class Program {
     public static void main(String[] args) throws IllegalArgumentException, InvalidPropertiesFormatException {
         Persistencia.inicializar();
-      //  ListarVehiculosView view = new ListarVehiculosView();
-      //  view.setVisible(true);
-        MenuView view2 = new MenuView();
-        view2.setVisible(true);
+        MenuView view = new MenuView();
+        view.setVisible(true);
       
     }
 }
