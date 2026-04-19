@@ -62,12 +62,48 @@ public class Persistencia {
     public static ArrayList<Vehiculo> getVehiculos(){
         return vehiculos;
     }
+    public static ArrayList<Sucursal> getSucursales(){
+        return sucursales;
+    }
+    public static ArrayList<Marca> getMarcas(){
+        return marcas;
+    }
     
     public static Optional<Vehiculo> getVehiculo(String patente){
         return vehiculos.stream()
                 .filter(v -> v.getPatente().equals(patente))
                 .findFirst();
     }
+    
+    public static Marca getMarca(String nombre){
+        return marcas.stream().filter(m -> m.getNombre().equals(nombre)).findFirst().get();
+    }
+    public static Sucursal getSucursal(String codigo){
+        return sucursales.stream().filter(c -> c.getCodigo().equals(codigo)).findFirst().get();
+    }
+    
+    public static void addVehiculo(Object[] vehiculo)
+    {
+        Marca m = getMarca((String)vehiculo[1]);
+        Sucursal s = getSucursal((String)vehiculo[5]);
+        String tipo = (String)vehiculo[8];
+        Vehiculo v;
+        if(tipo.equals("COMBUSTIBLE"))
+        {
+            v = new VehiculoCombustible(
+                    (String)vehiculo[0],m,(String)vehiculo[2],(int)vehiculo[3],
+            (double)vehiculo[4],s, (double)vehiculo[6],(double)vehiculo[7]);
+        }
+        else
+        {
+            v = new VehiculoElectrico(
+                    (String)vehiculo[0],m,(String)vehiculo[2],(int)vehiculo[3],
+            (double)vehiculo[4],s, (double)vehiculo[6]);
+        }
+        
+        vehiculos.add(v);
+    }
+    
     
     public static void inicializar(){
         inicializarResponsables();
